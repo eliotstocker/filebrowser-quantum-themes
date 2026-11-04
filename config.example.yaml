@@ -1,0 +1,31 @@
+# Example config.yaml for FileBrowser Quantum with OS-style & custom themes
+# Documentation: https://filebrowserquantum.com/en/docs/configuration/frontend/themes/
+
+frontend:
+  styling:
+    # Optional: apply base styling globally to all users
+    # customCSS: "/themes/os-minimal.css"
+
+    # Define user-selectable themes
+    customThemes:
+      default:
+        description: "OS Minimal (Default)"
+        css: "/themes/os-minimal.css"
+      os-minimal:
+        description: "OS Minimal (Black & White)"
+        css: "/themes/os-minimal.css"
+      macos-finder:
+        description: "macOS Finder"
+        css: "/themes/macos-finder.css"
+      windows-explorer:
+        description: "Windows 11 Explorer"
+        css: "/themes/windows-explorer.css"
+      aurora:
+        description: "Quantum Aurora (Glass)"
+        css: "/themes/aurora.css"
+      obsidian:
+        description: "Quantum Obsidian (OLED)"
+        css: "/themes/obsidian.css"
+      catppuccin-mocha:
+        description: "Catppuccin Mocha"
+        css: "/themes/catppuccin-mocha.css"

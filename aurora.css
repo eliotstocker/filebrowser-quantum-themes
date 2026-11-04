@@ -1,0 +1,332 @@
+/**
+ * Quantum Aurora Theme for FileBrowser Quantum
+ * A modern, dark glassmorphism theme featuring deep obsidian tones, vibrant cyan-to-violet aurora accents, and polished micro-interactions.
+ * https://github.com/gtsteffaniak/filebrowser
+ */
+
+:root,
+.dark-mode {
+  /* Brand Accent & Gradients */
+  --blue: #00d2ff;
+  --dark-blue: #0088ff;
+  --accent-secondary: #a855f7;
+  --primaryColor: var(--blue);
+  --accent-gradient: linear-gradient(135deg, #00d2ff 0%, #a855f7 100%);
+  
+  /* Backgrounds & Surfaces */
+  --background: #0b0f17;
+  --alt-background: #111827;
+  --surfacePrimary: #162032;
+  --surfaceSecondary: #1f2e47;
+  --iconBackground: #1b263b;
+  --activeWhiteIcon: #00d2ff;
+
+  /* Text & Contrast */
+  --textPrimary: #f1f5f9;
+  --textSecondary: #94a3b8;
+  --divider: rgba(255, 255, 255, 0.08);
+
+  /* Geometry & Glassmorphism */
+  --borderRadius: 12px;
+  --borderWidth: 1px;
+  --panel-bg: rgba(17, 24, 39, 0.78);
+  --panel-blur: blur(16px) saturate(180%);
+  --hoverOverlay: rgba(0, 210, 255, 0.07);
+  --overlay: rgba(5, 8, 15, 0.7);
+
+  /* Elevation Shadows */
+  --surfaceElevationShadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -2px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Global App Styling */
+body {
+  background-color: var(--background);
+  color: var(--textPrimary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgba(0, 210, 255, 0.35);
+  color: #ffffff;
+}
+
+/* Scrollbars */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 210, 255, 0.5);
+  background-clip: padding-box;
+}
+
+/* Header / App Bar */
+header {
+  background: rgba(11, 15, 23, 0.82) !important;
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+header title {
+  font-weight: 600;
+  color: var(--textPrimary);
+  letter-spacing: -0.015em;
+}
+
+header .action {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--borderRadius);
+}
+
+header .action:hover {
+  background: var(--hoverOverlay);
+  color: var(--blue);
+  transform: translateY(-1px);
+}
+
+/* Sidebar Navigation */
+#sidebar {
+  background: rgba(14, 20, 32, 0.85) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.35);
+}
+
+#sidebar .action {
+  margin: 3px 0;
+  border-radius: 10px;
+  padding: 0.6em 0.8em;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+}
+
+#sidebar .action:hover {
+  background: rgba(0, 210, 255, 0.1);
+  color: #00d2ff;
+  border-color: rgba(0, 210, 255, 0.25);
+  transform: translateX(4px);
+}
+
+#sidebar .action.active {
+  background: linear-gradient(90deg, rgba(0, 210, 255, 0.18) 0%, rgba(168, 85, 247, 0.1) 100%);
+  border-left: 3px solid #00d2ff;
+  border-top: 1px solid rgba(0, 210, 255, 0.2);
+  border-right: 1px solid rgba(168, 85, 247, 0.1);
+  border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+  color: #00d2ff;
+  font-weight: 600;
+}
+
+#sidebar .action i {
+  color: var(--textSecondary);
+  transition: color 0.2s ease;
+}
+
+#sidebar .action:hover i,
+#sidebar .action.active i {
+  color: #00d2ff;
+}
+
+/* Search Bar */
+#search {
+  border-radius: var(--borderRadius);
+}
+
+#search .search-input-container {
+  background: rgba(17, 24, 39, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--borderRadius);
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+#search .search-input-container:focus-within {
+  border-color: #00d2ff;
+  box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2), 0 0 20px rgba(0, 210, 255, 0.15);
+}
+
+#search input {
+  color: var(--textPrimary);
+}
+
+#search input::placeholder {
+  color: var(--textSecondary);
+}
+
+/* File Listing Items (Grid & List) */
+.listing-item {
+  background: rgba(22, 32, 50, 0.65) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--borderRadius);
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.listing-item:hover {
+  background: rgba(28, 42, 66, 0.85) !important;
+  border-color: rgba(0, 210, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 24px -4px rgba(0, 0, 0, 0.45),
+    0 0 16px rgba(0, 210, 255, 0.15);
+}
+
+.listing-item.selected {
+  background: rgba(0, 210, 255, 0.15) !important;
+  border-color: #00d2ff !important;
+  box-shadow: 0 0 18px rgba(0, 210, 255, 0.25), inset 0 0 10px rgba(0, 210, 255, 0.08);
+}
+
+.listing-item .name {
+  font-weight: 500;
+  color: var(--textPrimary);
+}
+
+.listing-item .size,
+.listing-item .modified {
+  color: var(--textSecondary);
+  font-size: 0.85em;
+}
+
+/* Cards & Modals */
+.card,
+.floating-window {
+  background: rgba(22, 32, 50, 0.78) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-radius: 16px;
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 20px rgba(0, 210, 255, 0.08);
+}
+
+.card-title {
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 0.75em;
+  margin-bottom: 1em;
+}
+
+/* Buttons */
+.button,
+button.button {
+  background: linear-gradient(135deg, #00d2ff 0%, #0088ff 100%) !important;
+  color: #050b14 !important;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--borderRadius);
+  box-shadow: 0 4px 14px rgba(0, 210, 255, 0.3);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:hover,
+button.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(0, 210, 255, 0.5);
+  filter: brightness(1.08);
+}
+
+.button:active,
+button.button:active {
+  transform: translateY(0);
+}
+
+button {
+  border-radius: var(--borderRadius);
+  background-color: var(--surfaceSecondary);
+  color: var(--textPrimary);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--surfaceSecondary) 80%, var(--primaryColor));
+  border-color: rgba(0, 210, 255, 0.3);
+}
+
+/* Inputs & Form Controls */
+.input {
+  background: rgba(14, 20, 32, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: var(--textPrimary);
+  border-radius: var(--borderRadius);
+  transition: all 0.2s ease;
+}
+
+.input:hover {
+  border-color: rgba(0, 210, 255, 0.4) !important;
+}
+
+.input:focus {
+  border-color: #00d2ff !important;
+  box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.25);
+  outline: none;
+}
+
+/* Floating Action Button (FAB) */
+.fab,
+#main .fab {
+  background: linear-gradient(135deg, #00d2ff 0%, #a855f7 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fab:hover,
+#main .fab:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 28px rgba(168, 85, 247, 0.5);
+}
+
+/* Toast & Notifications */
+.toast,
+.notification {
+  background: rgba(17, 24, 39, 0.9) !important;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 210, 255, 0.3) !important;
+  border-radius: var(--borderRadius);
+  color: var(--textPrimary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 210, 255, 0.15);
+}
+
+/* Tooltips */
+.floating-tooltip {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  border-radius: 8px;
+  color: var(--textPrimary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Status Bar */
+#status-bar {
+  background: rgba(11, 15, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--textSecondary);
+}

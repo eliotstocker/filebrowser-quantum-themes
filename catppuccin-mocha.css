@@ -1,0 +1,129 @@
+/**
+ * Catppuccin Mocha Theme for FileBrowser Quantum
+ * Soothing pastel theme based on the official Catppuccin Mocha palette.
+ * https://github.com/catppuccin/catppuccin
+ */
+
+:root,
+.dark-mode {
+  /* Catppuccin Mocha Palette */
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;
+  --ctp-red: #f38ba8;
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;
+  --ctp-green: #a6e3a1;
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a;
+  --ctp-surface0: #313244;
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+
+  /* FileBrowser Variables mapping */
+  --blue: var(--ctp-blue);
+  --dark-blue: var(--ctp-sapphire);
+  --red: var(--ctp-red);
+  --primaryColor: var(--ctp-mauve);
+
+  --background: var(--ctp-base);
+  --alt-background: var(--ctp-mantle);
+  --surfacePrimary: var(--ctp-surface0);
+  --surfaceSecondary: var(--ctp-surface1);
+  --iconBackground: var(--ctp-surface0);
+  --activeWhiteIcon: var(--ctp-mauve);
+
+  --textPrimary: var(--ctp-text);
+  --textSecondary: var(--ctp-subtext0);
+  --divider: rgba(205, 214, 244, 0.1);
+
+  --borderRadius: 12px;
+  --borderWidth: 1px;
+  --panel-bg: rgba(24, 24, 37, 0.85);
+  --panel-blur: blur(16px);
+  --hoverOverlay: rgba(203, 166, 247, 0.1);
+  --overlay: rgba(17, 17, 27, 0.7);
+
+  --surfaceElevationShadow:
+    0 4px 6px -1px rgba(17, 17, 27, 0.5),
+    0 2px 4px -2px rgba(17, 17, 27, 0.5);
+}
+
+body {
+  background-color: var(--ctp-base);
+  color: var(--ctp-text);
+}
+
+header {
+  background: rgba(24, 24, 37, 0.85) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--divider);
+}
+
+#sidebar {
+  background: rgba(24, 24, 37, 0.9) !important;
+  backdrop-filter: blur(16px);
+  border-right: 1px solid var(--divider);
+}
+
+#sidebar .action:hover {
+  background: rgba(203, 166, 247, 0.15);
+  color: var(--ctp-mauve);
+}
+
+#sidebar .action.active {
+  background: rgba(203, 166, 247, 0.2);
+  border-left: 3px solid var(--ctp-mauve);
+  color: var(--ctp-mauve);
+}
+
+.listing-item {
+  background: var(--ctp-surface0) !important;
+  border: 1px solid var(--divider);
+  border-radius: var(--borderRadius);
+}
+
+.listing-item:hover {
+  background: var(--ctp-surface1) !important;
+  border-color: var(--ctp-mauve);
+  transform: translateY(-2px);
+}
+
+.listing-item.selected {
+  background: rgba(203, 166, 247, 0.2) !important;
+  border-color: var(--ctp-mauve) !important;
+}
+
+.button,
+button.button {
+  background: var(--ctp-mauve) !important;
+  color: var(--ctp-crust) !important;
+  font-weight: 600;
+  border-radius: var(--borderRadius);
+}
+
+.button:hover,
+button.button:hover {
+  filter: brightness(1.1);
+}
+
+.card,
+.floating-window {
+  background: var(--ctp-surface0) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: 14px;
+}

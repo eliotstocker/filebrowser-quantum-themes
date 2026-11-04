@@ -1,0 +1,289 @@
+/**
+ * macOS Finder Theme for FileBrowser Quantum
+ * Faithfully mimics Apple macOS Finder:
+ * - Native SF Pro system typography and subtle border radiuses (8px).
+ * - Distraction-free sidebar showing solely shortcuts / favorites.
+ * - Monochromatic black & white palette with authentic macOS selection blue (#0066cc / #0a84ff).
+ * - Top-right minimal user account avatar.
+ * - Settings hidden into a bottom-right floating trigger.
+ */
+
+:root {
+  --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", sans-serif;
+
+  /* macOS Light Mode */
+  --background: #ffffff;
+  --alt-background: #f5f5f7;
+  --surfacePrimary: #ffffff;
+  --surfaceSecondary: #e5e5ea;
+  --iconBackground: #e8e8ed;
+  --activeWhiteIcon: #1d1d1f;
+
+  --textPrimary: #1d1d1f;
+  --textSecondary: #86868b;
+  --divider: #d2d2d7;
+
+  --primaryColor: #0066cc;
+  --blue: #0066cc;
+  --dark-blue: #004499;
+
+  --borderRadius: 8px;
+  --borderWidth: 1px;
+  --panel-bg: #f5f5f7;
+  --panel-blur: none;
+  --hoverOverlay: rgba(0, 0, 0, 0.04);
+  --overlay: rgba(0, 0, 0, 0.25);
+
+  --surfaceElevationShadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode {
+  /* macOS Dark Mode */
+  --background: #1e1e1e;
+  --alt-background: #141414;
+  --surfacePrimary: #252525;
+  --surfaceSecondary: #323232;
+  --iconBackground: #2c2c2e;
+  --activeWhiteIcon: #ffffff;
+
+  --textPrimary: #f5f5f7;
+  --textSecondary: #98989d;
+  --divider: #38383a;
+
+  --primaryColor: #0a84ff;
+  --blue: #0a84ff;
+  --dark-blue: #0071e3;
+
+  --panel-bg: #141414;
+  --panel-blur: none;
+  --hoverOverlay: rgba(255, 255, 255, 0.06);
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  --surfaceElevationShadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+body {
+  font-family: var(--font-stack) !important;
+  background-color: var(--background) !important;
+  color: var(--textPrimary) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* macOS Slim Overlay Scrollbars */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 128, 0.25);
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 128, 0.5);
+}
+
+/* Header / Finder Unified Toolbar */
+header,
+header.flexbar {
+  background-color: var(--alt-background) !important;
+  border-bottom: 1px solid var(--divider) !important;
+  box-shadow: none !important;
+  height: 3.2em !important;
+  padding-right: 4.2em !important;
+}
+
+header title,
+header .topTitle {
+  font-size: 0.9em !important;
+  font-weight: 500 !important;
+  color: var(--textPrimary) !important;
+}
+
+header .action {
+  border-radius: 6px;
+  color: var(--textPrimary) !important;
+}
+header .action:hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+/* Finder Search Pill */
+.search-bar-container,
+#search .search-input-container {
+  background-color: var(--surfacePrimary) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: 6px !important;
+  padding: 0 0.5em !important;
+}
+
+/* Sidebar (Finder Favorites / Locations style) */
+#sidebar {
+  background-color: var(--alt-background) !important;
+  border-right: 1px solid var(--divider) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  filter: none !important;
+  padding: 0.8em 0.5em !important;
+}
+
+/* Hide non-shortcut sidebar components */
+#sidebar .user-card .logout-button,
+#sidebar .quick-toggles,
+#sidebar .file-actions,
+#sidebar .credits,
+#sidebar .release-banner {
+  display: none !important;
+}
+
+#sidebar .headline-card,
+#sidebar .user-card,
+#sidebar .user-card__profile {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+#sidebar a.person-button {
+  display: contents !important;
+}
+
+#sidebar .sidebar-links {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+#sidebar .sidebar-links-header {
+  border-bottom: 1px solid var(--divider);
+  padding: 0.2em 0.4em 0.5em;
+  margin-bottom: 0.4em;
+}
+
+#sidebar .sidebar-links-content a,
+#sidebar .sidebar-links-content .action {
+  border-radius: 6px !important;
+  padding: 0.4em 0.6em !important;
+  font-size: 0.88em !important;
+  color: var(--textPrimary) !important;
+  margin: 1px 0 !important;
+  border: none !important;
+}
+
+#sidebar .sidebar-links-content a:hover,
+#sidebar .sidebar-links-content .action:hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+#sidebar .sidebar-links-content a.active,
+#sidebar .sidebar-links-content .action.active {
+  background-color: var(--primaryColor) !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+}
+
+/* Top Right User Avatar */
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]) {
+  position: fixed !important;
+  top: calc(0.55em + var(--safe-area-top, 0px)) !important;
+  right: 1.1em !important;
+  z-index: 10 !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  border-radius: 50% !important;
+  background-color: var(--surfaceSecondary) !important;
+  color: var(--textPrimary) !important;
+  border: 1px solid var(--divider) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease !important;
+}
+
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover {
+  transform: scale(1.08) !important;
+}
+
+#sidebar a[href*="/settings"] .person-button__name {
+  display: none !important;
+}
+
+/* Floating Bottom-Right Settings Button */
+#sidebar a[href*="/settings"] i[aria-label="settings"] {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999 !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  background-color: var(--surfacePrimary) !important;
+  border: 1px solid var(--divider) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 20px !important;
+  color: var(--textPrimary) !important;
+  line-height: 1 !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+}
+
+#sidebar a[href*="/settings"] i[aria-label="settings"]:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Finder File Items */
+.listing-item {
+  border-radius: 6px !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: background-color 0.1s ease !important;
+}
+
+.listing-item:hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+.listing-item.selected {
+  background-color: rgba(0, 102, 204, 0.15) !important;
+  border-color: var(--primaryColor) !important;
+}
+
+/* Buttons */
+.button,
+button.button {
+  background-color: var(--primaryColor) !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+}
+
+/* Status Bar */
+#status-bar {
+  background-color: var(--alt-background) !important;
+  border-top: 1px solid var(--divider) !important;
+  font-size: 0.8em !important;
+}

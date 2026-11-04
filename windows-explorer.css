@@ -1,0 +1,266 @@
+/**
+ * Windows 11 File Explorer Theme for FileBrowser Quantum
+ * Mimics Microsoft Windows 11 Fluent File Explorer:
+ * - Segoe UI Variable typography with 4px subtle rounded geometry.
+ * - Clean Navigation Pane with shortcuts and favorites only.
+ * - Simple high-contrast monochrome design (pure white/black).
+ * - Minimal user account icon in the top right.
+ * - Settings hidden into a floating bottom-right action trigger.
+ */
+
+:root {
+  --font-stack: "Segoe UI Variable Text", "Segoe UI", -apple-system, system-ui, sans-serif;
+
+  /* Windows 11 Light Mode */
+  --background: #ffffff;
+  --alt-background: #f9f9f9;
+  --surfacePrimary: #ffffff;
+  --surfaceSecondary: #f3f3f3;
+  --iconBackground: #f0f0f0;
+  --activeWhiteIcon: #1a1a1a;
+
+  --textPrimary: #1a1a1a;
+  --textSecondary: #5d5d5d;
+  --divider: #e5e5e5;
+
+  --primaryColor: #0067c0;
+  --blue: #0067c0;
+  --dark-blue: #004e92;
+
+  --borderRadius: 4px;
+  --borderWidth: 1px;
+  --panel-bg: #f9f9f9;
+  --panel-blur: none;
+  --hoverOverlay: rgba(0, 0, 0, 0.05);
+  --overlay: rgba(0, 0, 0, 0.3);
+
+  --surfaceElevationShadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.dark-mode {
+  /* Windows 11 Dark Mode */
+  --background: #191919;
+  --alt-background: #202020;
+  --surfacePrimary: #242424;
+  --surfaceSecondary: #2d2d2d;
+  --iconBackground: #282828;
+  --activeWhiteIcon: #ffffff;
+
+  --textPrimary: #ffffff;
+  --textSecondary: #a0a0a0;
+  --divider: #333333;
+
+  --primaryColor: #4cc2ff;
+  --blue: #4cc2ff;
+  --dark-blue: #0078d4;
+
+  --panel-bg: #202020;
+  --panel-blur: none;
+  --hoverOverlay: rgba(255, 255, 255, 0.06);
+  --overlay: rgba(0, 0, 0, 0.7);
+
+  --surfaceElevationShadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+body {
+  font-family: var(--font-stack) !important;
+  background-color: var(--background) !important;
+  color: var(--textPrimary) !important;
+}
+
+/* Windows 11 Fluent Scrollbars */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.35);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.6);
+}
+
+/* Command Bar (Header) */
+header,
+header.flexbar {
+  background-color: var(--alt-background) !important;
+  border-bottom: 1px solid var(--divider) !important;
+  box-shadow: none !important;
+  height: 3.4em !important;
+  padding-right: 4.2em !important;
+}
+
+header .action {
+  border-radius: var(--borderRadius);
+  color: var(--textPrimary) !important;
+}
+header .action:hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+/* Address & Search Bar */
+.search-bar-container,
+#search .search-input-container {
+  background-color: var(--surfacePrimary) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: var(--borderRadius) !important;
+}
+
+/* Navigation Pane (Sidebar) */
+#sidebar {
+  background-color: var(--alt-background) !important;
+  border-right: 1px solid var(--divider) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  filter: none !important;
+  padding: 0.8em 0.5em !important;
+}
+
+/* Strip down sidebar to shortcuts only */
+#sidebar .user-card .logout-button,
+#sidebar .quick-toggles,
+#sidebar .file-actions,
+#sidebar .credits,
+#sidebar .release-banner {
+  display: none !important;
+}
+
+#sidebar .headline-card,
+#sidebar .user-card,
+#sidebar .user-card__profile {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+#sidebar a.person-button {
+  display: contents !important;
+}
+
+#sidebar .sidebar-links {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+#sidebar .sidebar-links-content a,
+#sidebar .sidebar-links-content .action {
+  border-radius: var(--borderRadius) !important;
+  padding: 0.4em 0.6em !important;
+  font-size: 0.9em !important;
+  color: var(--textPrimary) !important;
+  margin: 1px 0 !important;
+  border: none !important;
+}
+
+#sidebar .sidebar-links-content a:hover,
+#sidebar .sidebar-links-content .action:hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+#sidebar .sidebar-links-content a.active,
+#sidebar .sidebar-links-content .action.active {
+  background-color: var(--hoverOverlay) !important;
+  border-left: 3px solid var(--primaryColor) !important;
+  font-weight: 600 !important;
+}
+
+/* Top Right User Icon */
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]) {
+  position: fixed !important;
+  top: calc(0.6em + var(--safe-area-top, 0px)) !important;
+  right: 1.1em !important;
+  z-index: 10 !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  border-radius: 50% !important;
+  background-color: var(--surfaceSecondary) !important;
+  color: var(--textPrimary) !important;
+  border: 1px solid var(--divider) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  transition: background-color 0.15s ease !important;
+}
+
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+#sidebar a[href*="/settings"] .person-button__name {
+  display: none !important;
+}
+
+/* Bottom Right Settings Button */
+#sidebar a[href*="/settings"] i[aria-label="settings"] {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999 !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  background-color: var(--surfacePrimary) !important;
+  border: 1px solid var(--divider) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 22px !important;
+  color: var(--textPrimary) !important;
+  line-height: 1 !important;
+  transition: background-color 0.15s ease, transform 0.15s ease !important;
+}
+
+#sidebar a[href*="/settings"] i[aria-label="settings"]:hover {
+  transform: scale(1.06) !important;
+  background-color: var(--surfaceSecondary) !important;
+}
+
+/* Listing items (Windows Details & Tile view) */
+.listing-item {
+  border-radius: var(--borderRadius) !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  transition: background-color 0.1s ease !important;
+  box-shadow: none !important;
+}
+
+.listing-item:hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+.listing-item.selected {
+  background-color: var(--hoverOverlay) !important;
+  border-color: var(--primaryColor) !important;
+}
+
+/* Buttons */
+.button,
+button.button {
+  background-color: var(--primaryColor) !important;
+  color: #ffffff !important;
+  border-radius: var(--borderRadius) !important;
+}

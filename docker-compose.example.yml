@@ -1,0 +1,14 @@
+services:
+  filebrowser:
+    image: gtstef/filebrowser:latest # or ghcr.io/gtsteffaniak/filebrowser:latest
+    container_name: filebrowser-quantum
+    user: "1000:1000"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/srv
+      - ./config.yaml:/etc/filebrowser/config.yaml
+      - ./filebrowser.db:/etc/filebrowser/filebrowser.db
+      # Mount themes folder into container
+      - ./themes:/themes:ro
+    restart: unless-stopped
