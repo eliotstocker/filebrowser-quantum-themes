@@ -1,0 +1,402 @@
+/**
+ * OS Minimal (Black & White) Theme for FileBrowser Quantum
+ * Designed to mimic native desktop operating systems (macOS Finder / Windows 11 Explorer).
+ * - Ultra clean, super simple monochrome aesthetic (pure white & pure black).
+ * - Distraction-free sidebar dedicated entirely to shortcuts and pinned links.
+ * - Minimal user avatar icon positioned in the top right corner.
+ * - Settings hidden in a discreet floating button on the bottom right.
+ */
+
+:root {
+  /* Operating System Typography */
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", system-ui, -system-ui, sans-serif;
+
+  /* Monochrome Light Mode */
+  --background: #ffffff;
+  --alt-background: #f6f6f8;
+  --surfacePrimary: #ffffff;
+  --surfaceSecondary: #f0f0f3;
+  --iconBackground: #ebebef;
+  --activeWhiteIcon: #111111;
+
+  --textPrimary: #111111;
+  --textSecondary: #6e6e73;
+  --divider: #e5e5ea;
+
+  --primaryColor: #111111;
+  --blue: #0066cc;
+  --dark-blue: #004499;
+
+  --borderRadius: 6px;
+  --borderWidth: 1px;
+  --panel-bg: #f6f6f8;
+  --panel-blur: none;
+  --hoverOverlay: rgba(0, 0, 0, 0.05);
+  --overlay: rgba(0, 0, 0, 0.35);
+
+  --surfaceElevationShadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.dark-mode {
+  /* Monochrome Dark Mode */
+  --background: #000000;
+  --alt-background: #111111;
+  --surfacePrimary: #141414;
+  --surfaceSecondary: #1f1f1f;
+  --iconBackground: #1c1c1e;
+  --activeWhiteIcon: #ffffff;
+
+  --textPrimary: #f5f5f7;
+  --textSecondary: #86868b;
+  --divider: #262628;
+
+  --primaryColor: #ffffff;
+  --blue: #2997ff;
+  --dark-blue: #147ce5;
+
+  --panel-bg: #111111;
+  --panel-blur: none;
+  --hoverOverlay: rgba(255, 255, 255, 0.06);
+  --overlay: rgba(0, 0, 0, 0.65);
+
+  --surfaceElevationShadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Global OS Styling */
+body {
+  font-family: var(--font-stack) !important;
+  background-color: var(--background) !important;
+  color: var(--textPrimary) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Native OS Scrollbars */
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.6);
+}
+
+/* ==========================================================================
+   HEADER / TOOLBAR (Window Titlebar Style)
+   ========================================================================== */
+header,
+header.flexbar {
+  background: var(--background) !important;
+  border-bottom: 1px solid var(--divider) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  height: 3.25em !important;
+  padding-right: 4.2em !important; /* Space for the top-right user icon */
+}
+
+header title,
+header .topTitle {
+  font-size: 0.95em !important;
+  font-weight: 600 !important;
+  color: var(--textPrimary) !important;
+  letter-spacing: -0.01em;
+}
+
+/* Minimal Header Buttons */
+header .action {
+  border-radius: var(--borderRadius);
+  color: var(--textPrimary) !important;
+  transition: background-color 0.15s ease;
+}
+
+header .action:hover {
+  background-color: var(--hoverOverlay) !important;
+}
+
+/* Search Bar (OS Finder / Explorer search box) */
+.search-bar-container,
+#search .search-input-container {
+  background: var(--surfaceSecondary) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: var(--borderRadius) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.search-bar-container input,
+#search input {
+  font-family: var(--font-stack) !important;
+  font-size: 0.9em !important;
+  color: var(--textPrimary) !important;
+}
+
+/* ==========================================================================
+   SIDEBAR (Strictly Shortcuts & Locations Only)
+   ========================================================================== */
+#sidebar {
+  background-color: var(--alt-background) !important;
+  border-right: 1px solid var(--divider) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  filter: none !important;
+  isolation: auto !important;
+  contain: none !important;
+  padding: 0.75em 0.5em !important;
+}
+
+/* Hide clutter: user card background, quick toggles, file actions, footer credits */
+#sidebar .user-card .logout-button,
+#sidebar .quick-toggles,
+#sidebar .file-actions,
+#sidebar .credits,
+#sidebar .release-banner {
+  display: none !important;
+}
+
+/* Flatten the headline card wrapper so it takes zero height in sidebar */
+#sidebar .headline-card,
+#sidebar .user-card,
+#sidebar .user-card__profile {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: 0 !important;
+  overflow: visible !important;
+}
+
+#sidebar a.person-button {
+  display: contents !important;
+}
+
+/* Clean Sidebar Shortcuts Styling */
+#sidebar .sidebar-links {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#sidebar .sidebar-links-header {
+  border-bottom: 1px solid var(--divider);
+  padding: 0.25em 0.5em 0.5em;
+  margin-bottom: 0.5em;
+}
+
+#sidebar .sidebar-links-content a,
+#sidebar .sidebar-links-content .action {
+  border-radius: var(--borderRadius) !important;
+  padding: 0.45em 0.75em !important;
+  font-size: 0.9em !important;
+  font-weight: 400 !important;
+  color: var(--textPrimary) !important;
+  margin: 1px 0 !important;
+  border: none !important;
+  transition: background-color 0.15s ease !important;
+}
+
+#sidebar .sidebar-links-content a:hover,
+#sidebar .sidebar-links-content .action:hover {
+  background-color: var(--hoverOverlay) !important;
+  transform: none !important;
+}
+
+#sidebar .sidebar-links-content a.active,
+#sidebar .sidebar-links-content .action.active {
+  background-color: var(--hoverOverlay) !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   TOP RIGHT: USER AVATAR ICON
+   ========================================================================== */
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]) {
+  position: fixed !important;
+  top: calc(0.55em + var(--safe-area-top, 0px)) !important;
+  right: 1.1em !important;
+  z-index: 10 !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  border-radius: 50% !important;
+  background-color: var(--surfaceSecondary) !important;
+  color: var(--textPrimary) !important;
+  border: 1px solid var(--divider) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 19px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover {
+  transform: scale(1.08) !important;
+  background-color: var(--hoverOverlay) !important;
+  border-color: var(--textPrimary) !important;
+}
+
+/* Hide username text inside button */
+#sidebar a[href*="/settings"] .person-button__name {
+  display: none !important;
+}
+
+/* ==========================================================================
+   BOTTOM RIGHT: FLOATING SETTINGS TRIGGER
+   ========================================================================== */
+#sidebar a[href*="/settings"] i[aria-label="settings"] {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999 !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  background-color: var(--surfacePrimary) !important;
+  border: 1px solid var(--divider) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 22px !important;
+  color: var(--textPrimary) !important;
+  line-height: 1 !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.15s ease !important;
+}
+
+#sidebar a[href*="/settings"] i[aria-label="settings"]:hover {
+  transform: scale(1.08) rotate(20deg) !important;
+  background-color: var(--surfaceSecondary) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+}
+
+#sidebar a[href*="/settings"] i[aria-label="settings"]:active {
+  transform: scale(0.96) !important;
+}
+
+/* ==========================================================================
+   FILE LISTINGS (Finder / File Explorer Grid & Table Rows)
+   ========================================================================== */
+.listing-item {
+  border-radius: var(--borderRadius) !important;
+  border: 1px solid transparent !important;
+  background-color: transparent !important;
+  transition: background-color 0.12s ease, border-color 0.12s ease !important;
+  box-shadow: none !important;
+}
+
+.listing-item:hover {
+  background-color: var(--hoverOverlay) !important;
+  border-color: var(--divider) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.listing-item.selected {
+  background-color: var(--hoverOverlay) !important;
+  border-color: var(--textPrimary) !important;
+  box-shadow: none !important;
+}
+
+.listing-item .name {
+  font-size: 0.9em !important;
+  color: var(--textPrimary) !important;
+}
+
+.listing-item .size,
+.listing-item .modified {
+  font-size: 0.82em !important;
+  color: var(--textSecondary) !important;
+}
+
+/* Listing Header (Table columns) */
+.listing-header {
+  border-bottom: 1px solid var(--divider) !important;
+  font-size: 0.85em !important;
+  color: var(--textSecondary) !important;
+}
+
+/* ==========================================================================
+   CARDS, MODALS, PROMPTS (Native Dialog Style)
+   ========================================================================== */
+.card,
+.floating-window {
+  background-color: var(--surfacePrimary) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: var(--borderRadius) !important;
+  box-shadow: var(--surfaceElevationShadow) !important;
+}
+
+/* Standard OS Buttons */
+.button,
+button.button {
+  background-color: var(--textPrimary) !important;
+  color: var(--background) !important;
+  font-family: var(--font-stack) !important;
+  font-size: 0.9em !important;
+  font-weight: 500 !important;
+  border-radius: var(--borderRadius) !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition: opacity 0.15s ease !important;
+}
+
+.button:hover,
+button.button:hover {
+  opacity: 0.88 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+button {
+  border-radius: var(--borderRadius) !important;
+  background-color: var(--surfaceSecondary) !important;
+  color: var(--textPrimary) !important;
+  border: 1px solid var(--divider) !important;
+  font-family: var(--font-stack) !important;
+}
+
+/* Form Inputs */
+.input {
+  font-family: var(--font-stack) !important;
+  background-color: var(--surfacePrimary) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: var(--borderRadius) !important;
+  color: var(--textPrimary) !important;
+  box-shadow: none !important;
+}
+
+.input:focus {
+  border-color: var(--textPrimary) !important;
+  box-shadow: 0 0 0 1px var(--textPrimary) !important;
+  outline: none !important;
+}
+
+/* Minimal Status Bar */
+#status-bar {
+  background-color: var(--alt-background) !important;
+  border-top: 1px solid var(--divider) !important;
+  font-size: 0.82em !important;
+  color: var(--textSecondary) !important;
+}
