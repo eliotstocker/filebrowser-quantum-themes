@@ -8,58 +8,63 @@
  * - Settings hidden into a floating bottom-right action trigger.
  */
 
+html,
 :root {
   --font-stack: "Segoe UI Variable Text", "Segoe UI", -apple-system, system-ui, sans-serif;
+  --header-height: calc(3.3em + var(--safe-area-top, 0px)) !important;
 
   /* Windows 11 Light Mode */
-  --background: #ffffff;
-  --alt-background: #f9f9f9;
-  --surfacePrimary: #ffffff;
-  --surfaceSecondary: #f3f3f3;
-  --iconBackground: #f0f0f0;
-  --activeWhiteIcon: #1a1a1a;
+  --background: #ffffff !important;
+  --alt-background: #f9f9f9 !important;
+  --surfacePrimary: #ffffff !important;
+  --surfaceSecondary: #f0f0f0 !important;
+  --iconBackground: #f0f0f0 !important;
+  --activeWhiteIcon: #1a1a1a !important;
 
-  --textPrimary: #1a1a1a;
-  --textSecondary: #5d5d5d;
-  --divider: #e5e5e5;
+  --textPrimary: #1a1a1a !important;
+  --textSecondary: #5d5d5d !important;
+  --divider: #e5e5e5 !important;
 
-  --primaryColor: #0067c0;
-  --blue: #0067c0;
-  --dark-blue: #004e92;
+  --primaryColor: #0067c0 !important;
+  --icon-orange: #0067c0 !important;
+  --blue: #0067c0 !important;
+  --dark-blue: #004e92 !important;
 
-  --borderRadius: 4px;
-  --borderWidth: 1px;
-  --panel-bg: #f9f9f9;
-  --panel-blur: none;
-  --hoverOverlay: rgba(0, 0, 0, 0.05);
-  --overlay: rgba(0, 0, 0, 0.3);
+  --borderRadius: 4px !important;
+  --borderWidth: 1px !important;
+  --panel-bg: #f9f9f9 !important;
+  --panel-blur: none !important;
+  --hoverOverlay: rgba(0, 0, 0, 0.05) !important;
+  --overlay: rgba(0, 0, 0, 0.3) !important;
 
-  --surfaceElevationShadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --surfaceElevationShadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.06) !important;
 }
 
+html.dark-mode,
 .dark-mode {
   /* Windows 11 Dark Mode */
-  --background: #191919;
-  --alt-background: #202020;
-  --surfacePrimary: #242424;
-  --surfaceSecondary: #2d2d2d;
-  --iconBackground: #282828;
-  --activeWhiteIcon: #ffffff;
+  --background: #191919 !important;
+  --alt-background: #202020 !important;
+  --surfacePrimary: #242424 !important;
+  --surfaceSecondary: #2d2d2d !important;
+  --iconBackground: #282828 !important;
+  --activeWhiteIcon: #ffffff !important;
 
-  --textPrimary: #ffffff;
-  --textSecondary: #a0a0a0;
-  --divider: #333333;
+  --textPrimary: #ffffff !important;
+  --textSecondary: #a0a0a0 !important;
+  --divider: #333333 !important;
 
-  --primaryColor: #4cc2ff;
-  --blue: #4cc2ff;
-  --dark-blue: #0078d4;
+  --primaryColor: #4cc2ff !important;
+  --icon-orange: #4cc2ff !important;
+  --blue: #4cc2ff !important;
+  --dark-blue: #0078d4 !important;
 
-  --panel-bg: #202020;
-  --panel-blur: none;
-  --hoverOverlay: rgba(255, 255, 255, 0.06);
-  --overlay: rgba(0, 0, 0, 0.7);
+  --panel-bg: #202020 !important;
+  --panel-blur: none !important;
+  --hoverOverlay: rgba(255, 255, 255, 0.06) !important;
+  --overlay: rgba(0, 0, 0, 0.7) !important;
 
-  --surfaceElevationShadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --surfaceElevationShadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
 }
 
 body {
@@ -86,20 +91,44 @@ body {
 
 /* Command Bar (Header) */
 header,
-header.flexbar {
+header.flexbar,
+.sidebar-overlay header.flexbar {
   background-color: var(--alt-background) !important;
   border-bottom: 1px solid var(--divider) !important;
   box-shadow: none !important;
-  height: 3.4em !important;
-  padding-right: 4.2em !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  height: var(--header-height) !important;
+  padding-right: calc(3.6em + var(--safe-area-right, 0px)) !important;
+  z-index: 3 !important;
 }
 
-header .action {
-  border-radius: var(--borderRadius);
+header .action,
+header button.action,
+header .action.nav-toggle-button,
+header .action.menu-button,
+header .action.overflow-menu-button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  border-radius: var(--borderRadius) !important;
+  color: var(--textPrimary) !important;
+  stroke: var(--textPrimary) !important;
+}
+
+header .action .line,
+header button.action .line,
+header .action i {
+  stroke: var(--textPrimary) !important;
   color: var(--textPrimary) !important;
 }
-header .action:hover {
+
+header .action:hover,
+header button.action:hover {
   background-color: var(--hoverOverlay) !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* Address & Search Bar */
@@ -108,10 +137,19 @@ header .action:hover {
   background-color: var(--surfacePrimary) !important;
   border: 1px solid var(--divider) !important;
   border-radius: var(--borderRadius) !important;
+  height: 2.25em !important;
+}
+
+.search-bar-container input,
+#search-bar-input,
+#search input {
+  color: var(--textPrimary) !important;
 }
 
 /* Navigation Pane (Sidebar) */
-#sidebar {
+#sidebar,
+#sidebar.active,
+#sidebar.sticky {
   background-color: var(--alt-background) !important;
   border-right: 1px solid var(--divider) !important;
   box-shadow: none !important;
@@ -119,13 +157,26 @@ header .action:hover {
   -webkit-backdrop-filter: none !important;
   transform: none !important;
   filter: none !important;
-  padding: 0.8em 0.5em !important;
+  perspective: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  isolation: auto !important;
+  contain: none !important;
+  padding: 0.65em 0.5em !important;
+  z-index: 6 !important;
+}
+
+#sidebar.behind-overlay {
+  z-index: 3 !important;
 }
 
 /* Strip down sidebar to shortcuts only */
 #sidebar .user-card .logout-button,
+#sidebar .user-card .inner-card:has(.logout-button),
 #sidebar .quick-toggles,
+#sidebar .card-wrapper:has(.quick-toggles),
 #sidebar .file-actions,
+#sidebar .card-wrapper:has(.file-actions),
 #sidebar .credits,
 #sidebar .release-banner {
   display: none !important;
@@ -133,18 +184,27 @@ header .action:hover {
 
 #sidebar .headline-card,
 #sidebar .user-card,
-#sidebar .user-card__profile {
+#sidebar .user-card__profile,
+#sidebar .user-card > .inner-card {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  min-height: 0 !important;
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
   overflow: visible !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
 }
 
-#sidebar a.person-button {
+#sidebar a.person-button,
+#sidebar button.person-button {
   display: contents !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
 }
 
 #sidebar .sidebar-links {
@@ -152,36 +212,78 @@ header .action:hover {
   box-shadow: none !important;
   border: none !important;
   padding: 0 !important;
+  margin: 0 !important;
 }
 
+#sidebar .sidebar-links-header {
+  border-bottom: 1px solid var(--divider) !important;
+  padding: 0.15em 0.35em 0.45em !important;
+  margin-bottom: 0.4em !important;
+}
+
+#sidebar .sidebar-links-header .action,
+#sidebar .sidebar-links-header button {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  color: var(--textSecondary) !important;
+}
+
+#sidebar .sidebar-links a,
+#sidebar .sidebar-links .button,
+#sidebar .sidebar-links .action,
 #sidebar .sidebar-links-content a,
-#sidebar .sidebar-links-content .action {
+#sidebar .sidebar-links-content .button,
+#sidebar .sidebar-links-content .action,
+#sidebar a.sidebar-link-button,
+#sidebar a.source-button {
+  background: transparent !important;
+  background-color: transparent !important;
   border-radius: var(--borderRadius) !important;
   padding: 0.4em 0.6em !important;
   font-size: 0.9em !important;
   color: var(--textPrimary) !important;
   margin: 1px 0 !important;
-  border: none !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
+#sidebar .link-container,
+#sidebar .source-container,
+#sidebar .link-container span,
+#sidebar .source-container span {
+  color: var(--textPrimary) !important;
+  min-height: 2.1em !important;
+}
+
+#sidebar .sidebar-links a:hover,
 #sidebar .sidebar-links-content a:hover,
-#sidebar .sidebar-links-content .action:hover {
+#sidebar a.sidebar-link-button:hover,
+#sidebar a.source-button:hover {
   background-color: var(--hoverOverlay) !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
+#sidebar .sidebar-links a.active,
 #sidebar .sidebar-links-content a.active,
-#sidebar .sidebar-links-content .action.active {
-  background-color: var(--hoverOverlay) !important;
+#sidebar a.sidebar-link-button.active,
+#sidebar a.source-button.active {
+  background-color: var(--surfaceSecondary) !important;
   border-left: 3px solid var(--primaryColor) !important;
   font-weight: 600 !important;
 }
 
 /* Top Right User Icon */
-#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]) {
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]),
+#sidebar a[href*="/settings"] i:not([aria-label="settings"]),
+#sidebar .person-button i:not([aria-label="settings"]):not(.material-symbols-outlined) {
   position: fixed !important;
-  top: calc(0.6em + var(--safe-area-top, 0px)) !important;
-  right: 1.1em !important;
-  z-index: 10 !important;
+  top: calc(0.55em + var(--safe-area-top, 0px)) !important;
+  right: calc(0.85em + var(--safe-area-right, 0px)) !important;
+  z-index: 10000 !important;
   width: 30px !important;
   height: 30px !important;
   min-width: 30px !important;
@@ -194,30 +296,33 @@ header .action:hover {
   align-items: center !important;
   justify-content: center !important;
   font-size: 18px !important;
+  line-height: 1 !important;
   padding: 0 !important;
   margin: 0 !important;
   cursor: pointer !important;
   transition: background-color 0.15s ease !important;
 }
 
-#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover {
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover,
+#sidebar a[href*="/settings"] i:not([aria-label="settings"]):hover {
   background-color: var(--hoverOverlay) !important;
 }
 
-#sidebar a[href*="/settings"] .person-button__name {
+#sidebar a[href*="/settings"] .person-button__name,
+#sidebar .person-button .person-button__name {
   display: none !important;
 }
 
 /* Bottom Right Settings Button */
 #sidebar a[href*="/settings"] i[aria-label="settings"] {
   position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  z-index: 9999 !important;
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
+  bottom: calc(3.1em + var(--safe-area-bottom, 0px)) !important;
+  right: calc(1.1em + var(--safe-area-right, 0px)) !important;
+  z-index: 10000 !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
   padding: 0 !important;
   margin: 0 !important;
   border-radius: 50% !important;
@@ -228,7 +333,7 @@ header .action:hover {
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  font-size: 22px !important;
+  font-size: 20px !important;
   color: var(--textPrimary) !important;
   line-height: 1 !important;
   transition: background-color 0.15s ease, transform 0.15s ease !important;
@@ -252,15 +357,42 @@ header .action:hover {
   background-color: var(--hoverOverlay) !important;
 }
 
-.listing-item.selected {
+.listing-item.selected,
+.listing-item[aria-selected="true"] {
   background-color: var(--hoverOverlay) !important;
   border-color: var(--primaryColor) !important;
+  color: var(--textPrimary) !important;
+}
+
+.listing-item-header,
+.listing-item-header.card,
+.listing-header {
+  background: var(--background) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--divider) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 0.85em !important;
+  color: var(--textSecondary) !important;
+  padding: 0.6em 0.85em !important;
 }
 
 /* Buttons */
-.button,
-button.button {
+.button:not(.sidebar-link-button):not(.source-button):not(.person-button),
+button.button:not(.sidebar-link-button):not(.source-button):not(.person-button) {
   background-color: var(--primaryColor) !important;
   color: #ffffff !important;
   border-radius: var(--borderRadius) !important;
+}
+
+#status-bar {
+  background-color: var(--alt-background) !important;
+  border-top: 1px solid var(--divider) !important;
+  font-size: 0.82em !important;
+}
+
+#status-bar.moveWithSidebar {
+  left: 20em !important;
+  width: auto !important;
+  right: 0 !important;
 }

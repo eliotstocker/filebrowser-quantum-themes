@@ -7,59 +7,67 @@
  * - Settings hidden in a discreet floating button on the bottom right.
  */
 
+html,
 :root {
   /* Operating System Typography */
   --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", system-ui, -system-ui, sans-serif;
 
+  /* Sync header height so sidebar and main view sit flush against the titlebar */
+  --header-height: calc(3.25em + var(--safe-area-top, 0px)) !important;
+
   /* Monochrome Light Mode */
-  --background: #ffffff;
-  --alt-background: #f6f6f8;
-  --surfacePrimary: #ffffff;
-  --surfaceSecondary: #f0f0f3;
-  --iconBackground: #ebebef;
-  --activeWhiteIcon: #111111;
+  --background: #ffffff !important;
+  --alt-background: #f6f6f8 !important;
+  --surfacePrimary: #ffffff !important;
+  --surfaceSecondary: #ededf0 !important;
+  --iconBackground: #ebebef !important;
+  --activeWhiteIcon: #111111 !important;
 
-  --textPrimary: #111111;
-  --textSecondary: #6e6e73;
-  --divider: #e5e5ea;
+  --textPrimary: #111111 !important;
+  --textSecondary: #6e6e73 !important;
+  --divider: #e5e5ea !important;
 
-  --primaryColor: #111111;
-  --blue: #0066cc;
-  --dark-blue: #004499;
+  /* Override inline --primaryColor set by Layout.vue (e.g. halloween orange / themeColor) */
+  --primaryColor: #111111 !important;
+  --icon-orange: #111111 !important;
+  --blue: #111111 !important;
+  --dark-blue: #333333 !important;
 
-  --borderRadius: 6px;
-  --borderWidth: 1px;
-  --panel-bg: #f6f6f8;
-  --panel-blur: none;
-  --hoverOverlay: rgba(0, 0, 0, 0.05);
-  --overlay: rgba(0, 0, 0, 0.35);
+  --borderRadius: 6px !important;
+  --borderWidth: 1px !important;
+  --panel-bg: #f6f6f8 !important;
+  --panel-blur: none !important;
+  --hoverOverlay: rgba(0, 0, 0, 0.05) !important;
+  --overlay: rgba(0, 0, 0, 0.35) !important;
 
-  --surfaceElevationShadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --surfaceElevationShadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
 }
 
+html.dark-mode,
 .dark-mode {
   /* Monochrome Dark Mode */
-  --background: #000000;
-  --alt-background: #111111;
-  --surfacePrimary: #141414;
-  --surfaceSecondary: #1f1f1f;
-  --iconBackground: #1c1c1e;
-  --activeWhiteIcon: #ffffff;
+  --background: #000000 !important;
+  --alt-background: #111111 !important;
+  --surfacePrimary: #141414 !important;
+  --surfaceSecondary: #222224 !important;
+  --iconBackground: #1c1c1e !important;
+  --activeWhiteIcon: #ffffff !important;
 
-  --textPrimary: #f5f5f7;
-  --textSecondary: #86868b;
-  --divider: #262628;
+  --textPrimary: #f5f5f7 !important;
+  --textSecondary: #86868b !important;
+  --divider: #262628 !important;
 
-  --primaryColor: #ffffff;
-  --blue: #2997ff;
-  --dark-blue: #147ce5;
+  --primaryColor: #ffffff !important;
+  --icon-orange: #ffffff !important;
+  --blue: #ffffff !important;
+  --dark-blue: #cccccc !important;
 
-  --panel-bg: #111111;
-  --panel-blur: none;
-  --hoverOverlay: rgba(255, 255, 255, 0.06);
-  --overlay: rgba(0, 0, 0, 0.65);
+  --panel-bg: #111111 !important;
+  --panel-blur: none !important;
+  --hoverOverlay: rgba(255, 255, 255, 0.07) !important;
+  --overlay: rgba(0, 0, 0, 0.65) !important;
 
-  --surfaceElevationShadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --surfaceElevationShadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Global OS Styling */
@@ -91,14 +99,16 @@ body {
    HEADER / TOOLBAR (Window Titlebar Style)
    ========================================================================== */
 header,
-header.flexbar {
+header.flexbar,
+.sidebar-overlay header.flexbar {
   background: var(--background) !important;
   border-bottom: 1px solid var(--divider) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  height: 3.25em !important;
-  padding-right: 4.2em !important; /* Space for the top-right user icon */
+  height: var(--header-height) !important;
+  padding-right: calc(3.6em + var(--safe-area-right, 0px)) !important; /* Space for the top-right user icon */
+  z-index: 3 !important; /* Keep below #sidebar (z-index: 6) so top-right fixed user avatar is visible */
 }
 
 header title,
@@ -109,15 +119,35 @@ header .topTitle {
   letter-spacing: -0.01em;
 }
 
-/* Minimal Header Buttons */
-header .action {
-  border-radius: var(--borderRadius);
+/* Clean Minimal Header Toolbar Icons (no blocky grey button backgrounds) */
+header .action,
+header button.action,
+header .action.nav-toggle-button,
+header .action.menu-button,
+header .action.overflow-menu-button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  border-radius: var(--borderRadius) !important;
   color: var(--textPrimary) !important;
-  transition: background-color 0.15s ease;
+  stroke: var(--textPrimary) !important;
+  transition: background-color 0.15s ease !important;
 }
 
-header .action:hover {
+header .action .line,
+header button.action .line,
+header .action i {
+  stroke: var(--textPrimary) !important;
+  color: var(--textPrimary) !important;
+}
+
+header .action:hover,
+header button.action:hover {
   background-color: var(--hoverOverlay) !important;
+  border-color: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* Search Bar (OS Finder / Explorer search box) */
@@ -128,9 +158,16 @@ header .action:hover {
   border-radius: var(--borderRadius) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
+  height: 2.25em !important;
+}
+
+.search-bar-container i,
+#search .search-input-container i {
+  color: var(--textSecondary) !important;
 }
 
 .search-bar-container input,
+#search-bar-input,
 #search input {
   font-family: var(--font-stack) !important;
   font-size: 0.9em !important;
@@ -140,7 +177,9 @@ header .action:hover {
 /* ==========================================================================
    SIDEBAR (Strictly Shortcuts & Locations Only)
    ========================================================================== */
-#sidebar {
+#sidebar,
+#sidebar.active,
+#sidebar.sticky {
   background-color: var(--alt-background) !important;
   border-right: 1px solid var(--divider) !important;
   box-shadow: none !important;
@@ -148,15 +187,26 @@ header .action:hover {
   -webkit-backdrop-filter: none !important;
   transform: none !important;
   filter: none !important;
+  perspective: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
   isolation: auto !important;
   contain: none !important;
-  padding: 0.75em 0.5em !important;
+  padding: 0.65em 0.5em !important;
+  z-index: 6 !important; /* Above header (z-index: 3) so fixed top-right avatar renders above header */
 }
 
-/* Hide clutter: user card background, quick toggles, file actions, footer credits */
+#sidebar.behind-overlay {
+  z-index: 3 !important;
+}
+
+/* Hide clutter: user card logout, quick toggles, file actions, footer credits */
 #sidebar .user-card .logout-button,
+#sidebar .user-card .inner-card:has(.logout-button),
 #sidebar .quick-toggles,
+#sidebar .card-wrapper:has(.quick-toggles),
 #sidebar .file-actions,
+#sidebar .card-wrapper:has(.file-actions),
 #sidebar .credits,
 #sidebar .release-banner {
   display: none !important;
@@ -165,7 +215,8 @@ header .action:hover {
 /* Flatten the headline card wrapper so it takes zero height in sidebar */
 #sidebar .headline-card,
 #sidebar .user-card,
-#sidebar .user-card__profile {
+#sidebar .user-card__profile,
+#sidebar .user-card > .inner-card {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
@@ -174,10 +225,17 @@ header .action:hover {
   min-height: 0 !important;
   height: 0 !important;
   overflow: visible !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
 }
 
-#sidebar a.person-button {
+#sidebar a.person-button,
+#sidebar button.person-button {
   display: contents !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
 }
 
 /* Clean Sidebar Shortcuts Styling */
@@ -190,43 +248,118 @@ header .action:hover {
 }
 
 #sidebar .sidebar-links-header {
-  border-bottom: 1px solid var(--divider);
-  padding: 0.25em 0.5em 0.5em;
-  margin-bottom: 0.5em;
+  border-bottom: 1px solid var(--divider) !important;
+  padding: 0.15em 0.35em 0.45em !important;
+  margin-bottom: 0.4em !important;
 }
 
+#sidebar .sidebar-links-header .action,
+#sidebar .sidebar-links-header button {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  color: var(--textSecondary) !important;
+}
+
+#sidebar .sidebar-links-header .action:hover,
+#sidebar .sidebar-links-header button:hover {
+  background: var(--hoverOverlay) !important;
+  color: var(--textPrimary) !important;
+}
+
+/* Prevent .button rule from turning sidebar links into solid black blocks */
+#sidebar .sidebar-links a,
+#sidebar .sidebar-links .button,
+#sidebar .sidebar-links .action,
 #sidebar .sidebar-links-content a,
-#sidebar .sidebar-links-content .action {
+#sidebar .sidebar-links-content .button,
+#sidebar .sidebar-links-content .action,
+#sidebar a.sidebar-link-button,
+#sidebar a.source-button {
+  background: transparent !important;
+  background-color: transparent !important;
   border-radius: var(--borderRadius) !important;
-  padding: 0.45em 0.75em !important;
+  padding: 0.4em 0.65em !important;
   font-size: 0.9em !important;
   font-weight: 400 !important;
   color: var(--textPrimary) !important;
   margin: 1px 0 !important;
-  border: none !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
   transition: background-color 0.15s ease !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
+#sidebar .link-container,
+#sidebar .source-container {
+  color: var(--textPrimary) !important;
+  min-height: 2.1em !important;
+}
+
+#sidebar .link-container span,
+#sidebar .source-container span {
+  color: var(--textPrimary) !important;
+}
+
+#sidebar .link-icon {
+  color: var(--textSecondary) !important;
+}
+
+#sidebar .sidebar-links a:hover,
 #sidebar .sidebar-links-content a:hover,
-#sidebar .sidebar-links-content .action:hover {
+#sidebar a.sidebar-link-button:hover,
+#sidebar a.source-button:hover {
+  background: var(--hoverOverlay) !important;
   background-color: var(--hoverOverlay) !important;
   transform: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
 }
 
+#sidebar .sidebar-links a.active,
 #sidebar .sidebar-links-content a.active,
-#sidebar .sidebar-links-content .action.active {
-  background-color: var(--hoverOverlay) !important;
+#sidebar a.sidebar-link-button.active,
+#sidebar a.source-button.active {
+  background: var(--surfaceSecondary) !important;
+  background-color: var(--surfaceSecondary) !important;
   font-weight: 600 !important;
+}
+
+#sidebar a.sidebar-link-button.active .link-icon {
+  color: var(--textPrimary) !important;
+}
+
+/* Clean Monochrome Storage Usage Bar in Sidebar */
+#sidebar .usage-info .vue-simple-progress {
+  background: var(--surfaceSecondary) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: 4px !important;
+  margin: 0.25em 0 0.2em 0 !important;
+  overflow: hidden !important;
+}
+
+#sidebar .usage-info .vue-simple-progress-bar {
+  background: rgba(128, 128, 128, 0.35) !important;
+  border-radius: 3px !important;
+}
+
+#sidebar .usage-info .vue-simple-progress-text {
+  color: var(--textPrimary) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
 }
 
 /* ==========================================================================
    TOP RIGHT: USER AVATAR ICON
    ========================================================================== */
-#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]) {
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]),
+#sidebar a[href*="/settings"] i:not([aria-label="settings"]),
+#sidebar .person-button i:not([aria-label="settings"]):not(.material-symbols-outlined) {
   position: fixed !important;
   top: calc(0.55em + var(--safe-area-top, 0px)) !important;
-  right: 1.1em !important;
-  z-index: 10 !important;
+  right: calc(0.85em + var(--safe-area-right, 0px)) !important;
+  z-index: 10000 !important;
   width: 32px !important;
   height: 32px !important;
   min-width: 32px !important;
@@ -238,22 +371,25 @@ header .action:hover {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 19px !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
   padding: 0 !important;
   margin: 0 !important;
   cursor: pointer !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-  transition: transform 0.15s ease, background-color 0.15s ease !important;
+  box-shadow: none !important;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease !important;
 }
 
-#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover {
-  transform: scale(1.08) !important;
+#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover,
+#sidebar a[href*="/settings"] i:not([aria-label="settings"]):hover {
+  transform: scale(1.06) !important;
   background-color: var(--hoverOverlay) !important;
   border-color: var(--textPrimary) !important;
 }
 
 /* Hide username text inside button */
-#sidebar a[href*="/settings"] .person-button__name {
+#sidebar a[href*="/settings"] .person-button__name,
+#sidebar .person-button .person-button__name {
   display: none !important;
 }
 
@@ -262,24 +398,24 @@ header .action:hover {
    ========================================================================== */
 #sidebar a[href*="/settings"] i[aria-label="settings"] {
   position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  z-index: 9999 !important;
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
+  bottom: calc(3.1em + var(--safe-area-bottom, 0px)) !important; /* Float cleanly above the status bar */
+  right: calc(1.1em + var(--safe-area-right, 0px)) !important;
+  z-index: 10000 !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
   padding: 0 !important;
   margin: 0 !important;
   border-radius: 50% !important;
   background-color: var(--surfacePrimary) !important;
   border: 1px solid var(--divider) !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  font-size: 22px !important;
+  font-size: 20px !important;
   color: var(--textPrimary) !important;
   line-height: 1 !important;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.15s ease !important;
@@ -288,7 +424,7 @@ header .action:hover {
 #sidebar a[href*="/settings"] i[aria-label="settings"]:hover {
   transform: scale(1.08) rotate(20deg) !important;
   background-color: var(--surfaceSecondary) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
 }
 
 #sidebar a[href*="/settings"] i[aria-label="settings"]:active {
@@ -313,9 +449,11 @@ header .action:hover {
   box-shadow: none !important;
 }
 
-.listing-item.selected {
+.listing-item.selected,
+.listing-item[aria-selected="true"] {
   background-color: var(--hoverOverlay) !important;
   border-color: var(--textPrimary) !important;
+  color: var(--textPrimary) !important;
   box-shadow: none !important;
 }
 
@@ -330,17 +468,30 @@ header .action:hover {
   color: var(--textSecondary) !important;
 }
 
-/* Listing Header (Table columns) */
+/* Listing Column Header (Flat OS Table Header instead of floating card block) */
+.listing-item-header,
+.listing-item-header.card,
 .listing-header {
+  background: var(--background) !important;
+  background-color: var(--background) !important;
+  border: none !important;
   border-bottom: 1px solid var(--divider) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   font-size: 0.85em !important;
   color: var(--textSecondary) !important;
+  padding: 0.6em 0.85em !important;
+}
+
+.listing-item-header p.active,
+.listing-item-header p:hover {
+  color: var(--textPrimary) !important;
 }
 
 /* ==========================================================================
    CARDS, MODALS, PROMPTS (Native Dialog Style)
    ========================================================================== */
-.card,
+.card:not(.headline-card):not(.sidebar-links):not(.listing-item-header),
 .floating-window {
   background-color: var(--surfacePrimary) !important;
   border: 1px solid var(--divider) !important;
@@ -348,9 +499,9 @@ header .action:hover {
   box-shadow: var(--surfaceElevationShadow) !important;
 }
 
-/* Standard OS Buttons */
-.button,
-button.button {
+/* Standard OS Buttons (excluding sidebar links) */
+.button:not(.sidebar-link-button):not(.source-button):not(.person-button),
+button.button:not(.sidebar-link-button):not(.source-button):not(.person-button) {
   background-color: var(--textPrimary) !important;
   color: var(--background) !important;
   font-family: var(--font-stack) !important;
@@ -362,14 +513,14 @@ button.button {
   transition: opacity 0.15s ease !important;
 }
 
-.button:hover,
-button.button:hover {
+.button:not(.sidebar-link-button):not(.source-button):not(.person-button):hover,
+button.button:not(.sidebar-link-button):not(.source-button):not(.person-button):hover {
   opacity: 0.88 !important;
   transform: none !important;
   box-shadow: none !important;
 }
 
-button {
+button:not(.action) {
   border-radius: var(--borderRadius) !important;
   background-color: var(--surfaceSecondary) !important;
   color: var(--textPrimary) !important;
@@ -393,10 +544,50 @@ button {
   outline: none !important;
 }
 
-/* Minimal Status Bar */
+/* Minimal Status Bar & Clean Monochrome Size Slider */
 #status-bar {
   background-color: var(--alt-background) !important;
   border-top: 1px solid var(--divider) !important;
   font-size: 0.82em !important;
   color: var(--textSecondary) !important;
+  box-shadow: none !important;
+}
+
+#status-bar.moveWithSidebar {
+  left: 20em !important;
+  width: auto !important;
+  right: 0 !important;
+}
+
+#status-bar input[type="range"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: var(--divider) !important;
+  height: 4px !important;
+  border-radius: 999px !important;
+  accent-color: var(--textPrimary) !important;
+  outline: none !important;
+  border: none !important;
+}
+
+#status-bar input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: var(--textPrimary) !important;
+  border: 2px solid var(--background) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+  cursor: pointer !important;
+}
+
+#status-bar input[type="range"]::-moz-range-thumb {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: var(--textPrimary) !important;
+  border: 2px solid var(--background) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+  cursor: pointer !important;
 }
