@@ -496,8 +496,8 @@ header button.action[disabled] {
 }
 
 /* Buttons */
-.button:not(.sidebar-link-button):not(.source-button):not(.person-button):not(.logout-button),
-button.button:not(.sidebar-link-button):not(.source-button):not(.person-button):not(.logout-button) {
+.button:not(.sidebar-link-button):not(.source-button):not(.person-button):not(.logout-button):not(.settings-group-title),
+button.button:not(.sidebar-link-button):not(.source-button):not(.person-button):not(.logout-button):not(.settings-group-title) {
   background-color: var(--primaryColor) !important;
   color: #ffffff !important;
   font-weight: 500 !important;
@@ -799,9 +799,9 @@ body::-webkit-scrollbar {
   box-sizing: border-box !important;
 }
 
-.settings-views .button,
-.settings-views button.button,
-.settings-views input.button {
+.settings-views .button:not(.settings-group-title),
+.settings-views button.button:not(.settings-group-title),
+.settings-views input.button:not(.settings-group-title) {
   height: 2.1rem !important;
   min-height: 2.1rem !important;
   padding: 0 0.85rem !important;
@@ -813,6 +813,86 @@ body::-webkit-scrollbar {
   justify-content: center !important;
   box-shadow: none !important;
 }
+
+/* Collapsible Settings Sections */
+.settings-group {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0.5rem 0 !important;
+}
+
+.settings-group-title,
+.settings-group-title.button,
+.settings-views .settings-group-title,
+.settings-views .settings-group-title.button {
+  width: 100% !important;
+  min-width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: auto !important;
+  min-height: 2.5rem !important;
+  padding: 0.6rem 0.9rem !important;
+  margin: 0 !important;
+  background-color: var(--alt-background) !important;
+  color: var(--textPrimary) !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  text-align: left !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.settings-group-title:hover,
+.settings-group-title.button:hover,
+.settings-views .settings-group-title:hover,
+.settings-views .settings-group-title.button:hover {
+  background-color: var(--hoverOverlay) !important;
+  color: var(--textPrimary) !important;
+}
+
+.settings-group-title.unclickable {
+  cursor: default !important;
+}
+
+.settings-group-title h3,
+.settings-views .settings-group-title h3 {
+  color: var(--textPrimary) !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 1 1 auto !important;
+  text-align: left !important;
+  display: block !important;
+}
+
+.settings-group-title .collapse-icon,
+.settings-views .settings-group-title .collapse-icon {
+  color: var(--textSecondary) !important;
+  font-size: 1.3rem !important;
+  margin-left: auto !important;
+  transition: transform 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.settings-group-title .collapse-icon.rotated,
+.settings-views .settings-group-title .collapse-icon.rotated {
+  transform: rotate(180deg) !important;
+}
+
+.settings-content,
+.settings-views .settings-content {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0.4rem 0 !important;
+}
+
 
 /* Data Tables in Settings */
 .settings-table-wrapper {
