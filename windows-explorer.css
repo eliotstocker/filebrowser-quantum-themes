@@ -158,19 +158,22 @@ header button.action:hover {
 #sidebar,
 #sidebar.active,
 #sidebar.sticky {
+  top: var(--header-height) !important;
+  height: calc(100% - var(--header-height)) !important;
+  max-height: calc(100% - var(--header-height)) !important;
+  box-sizing: border-box !important;
   background-color: var(--alt-background) !important;
   border-right: 1px solid var(--divider) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  transform: none !important;
   filter: none !important;
   perspective: none !important;
   will-change: auto !important;
   backface-visibility: visible !important;
   isolation: auto !important;
   contain: none !important;
-  padding: 0.65em 0.5em !important;
+  padding: 0.65em 0.5em 5em 0.5em !important;
   z-index: 6 !important;
 }
 
