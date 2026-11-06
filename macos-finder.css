@@ -100,7 +100,7 @@ header.flexbar,
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   height: var(--header-height) !important;
-  padding-right: calc(7.2em + var(--safe-area-right, 0px)) !important;
+  padding-right: calc(8em + var(--safe-area-right, 0px)) !important;
   z-index: 3 !important;
 }
 
@@ -108,7 +108,7 @@ header.flexbar,
   header,
   header.flexbar,
   .sidebar-overlay header.flexbar {
-    padding-right: calc(3.5em + var(--safe-area-right, 0px)) !important;
+    padding-right: calc(3.6em + var(--safe-area-right, 0px)) !important;
   }
 }
 
@@ -167,27 +167,52 @@ header button.action:hover {
 #sidebar,
 #sidebar.active,
 #sidebar.sticky {
-  top: var(--header-height) !important;
-  height: calc(100% - var(--header-height)) !important;
-  max-height: calc(100% - var(--header-height)) !important;
-  box-sizing: border-box !important;
   background-color: var(--alt-background) !important;
   border-right: 1px solid var(--divider) !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  transform: none !important;
   filter: none !important;
   perspective: none !important;
   will-change: auto !important;
   backface-visibility: visible !important;
   isolation: auto !important;
   contain: none !important;
-  padding: 0.65em 0.5em 5em 0.5em !important;
+  padding: 0.65em 0.5em 4.5em 0.5em !important;
   z-index: 6 !important;
 }
 
 #sidebar.behind-overlay {
   z-index: 3 !important;
+}
+
+/* Desktop: sticky or sidebar under header */
+@media (min-width: 769px) {
+  #sidebar,
+  #sidebar.sticky {
+    top: var(--header-height) !important;
+    height: calc(100% - var(--header-height)) !important;
+    max-height: calc(100% - var(--header-height)) !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Mobile: full-height overlay drawer sliding via left */
+@media (max-width: 768px) {
+  #sidebar {
+    top: 0 !important;
+    bottom: 0 !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    box-sizing: border-box !important;
+    left: -100% !important;
+    transition: left 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #sidebar.active {
+    left: 0 !important;
+  }
 }
 
 /* Hide non-shortcut sidebar components */
@@ -206,6 +231,7 @@ header button.action:hover {
 #sidebar .user-card > .inner-card,
 #sidebar .card-wrapper:has(.quick-toggles),
 #sidebar .quick-toggles {
+  position: static !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -291,13 +317,13 @@ header button.action:hover {
 #sidebar a.person-button,
 #sidebar button.person-button {
   position: fixed !important;
-  top: calc(0.5em + var(--safe-area-top, 0px)) !important;
-  right: calc(0.75em + var(--safe-area-right, 0px)) !important;
+  top: calc(0.55em + var(--safe-area-top, 0px)) !important;
+  right: calc(0.85em + var(--safe-area-right, 0px)) !important;
   z-index: 10000 !important;
   height: 30px !important;
   min-height: 30px !important;
   width: auto !important;
-  max-width: 11em !important;
+  max-width: 12em !important;
   padding: 0 10px 0 8px !important;
   margin: 0 !important;
   border-radius: 9999px !important;
@@ -345,7 +371,7 @@ header button.action:hover {
   font-weight: 500 !important;
   line-height: 1.2 !important;
   color: var(--textPrimary) !important;
-  max-width: 7.5em !important;
+  max-width: 8em !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
@@ -364,47 +390,40 @@ header button.action:hover {
   #sidebar a.person-button,
   #sidebar button.person-button {
     width: 30px !important;
+    min-width: 30px !important;
     padding: 0 !important;
-    right: calc(0.75em + var(--safe-area-right, 0px)) !important;
+    border-radius: 50% !important;
+    top: calc(0.55em + var(--safe-area-top, 0px)) !important;
+    right: calc(0.85em + var(--safe-area-right, 0px)) !important;
   }
 }
 
 /* Sidebar Logout Menu Item (Anchored at bottom of side menu) */
-#sidebar .user-card > .inner-card:has(.logout-button) {
+#sidebar .user-card .logout-button {
   position: absolute !important;
-  bottom: calc(3.2em + var(--safe-area-bottom, 0px)) !important;
+  bottom: calc(0.85em + var(--safe-area-bottom, 0px)) !important;
   left: 0.5em !important;
   right: 0.5em !important;
-  width: auto !important;
-  height: auto !important;
-  min-height: 2.2em !important;
-  padding-top: 0.35em !important;
-  border-top: 1px solid var(--divider) !important;
-  display: flex !important;
-  z-index: 10 !important;
-}
-
-#sidebar .user-card .logout-button {
-  position: static !important;
-  width: 100% !important;
+  width: calc(100% - 1em) !important;
   height: 2.2em !important;
   min-height: 2.2em !important;
   padding: 0.4em 0.6em !important;
   margin: 0 !important;
   border-radius: 6px !important;
-  background-color: transparent !important;
-  color: var(--textSecondary) !important;
-  border: 1px solid transparent !important;
+  background-color: var(--surfaceSecondary) !important;
+  color: var(--textPrimary) !important;
+  border: 1px solid var(--divider) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
   gap: 0.55em !important;
   font-size: 13px !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   line-height: 1 !important;
   cursor: pointer !important;
   box-shadow: none !important;
-  transition: background-color 0.15s ease, color 0.15s ease !important;
+  z-index: 10 !important;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
 }
 
 #sidebar .user-card .logout-button i {
@@ -418,13 +437,13 @@ header button.action:hover {
 #sidebar .user-card .logout-button::after {
   content: "Log out";
   font-size: 13px !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   color: inherit !important;
 }
 
 #sidebar .user-card .logout-button:hover {
   background-color: var(--hoverOverlay) !important;
-  color: var(--textPrimary) !important;
+  border-color: var(--textPrimary) !important;
   transform: none !important;
 }
 
