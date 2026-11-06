@@ -182,8 +182,8 @@ header button.action:hover {
 /* Hide non-shortcut sidebar components */
 #sidebar .user-card .logout-button,
 #sidebar .user-card .inner-card:has(.logout-button),
-#sidebar .quick-toggles,
-#sidebar .card-wrapper:has(.quick-toggles),
+#sidebar .quick-toggles > div:first-child,
+#sidebar .quick-toggles > div[aria-label="Toggle Theme"],
 #sidebar .file-actions,
 #sidebar .card-wrapper:has(.file-actions),
 #sidebar .credits,
@@ -194,7 +194,9 @@ header button.action:hover {
 #sidebar .headline-card,
 #sidebar .user-card,
 #sidebar .user-card__profile,
-#sidebar .user-card > .inner-card {
+#sidebar .user-card > .inner-card,
+#sidebar .card-wrapper:has(.quick-toggles),
+#sidebar .quick-toggles {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -316,40 +318,42 @@ header button.action:hover {
   transform: scale(1.08) !important;
 }
 
+/* Hide username text and redundant settings cog */
 #sidebar a[href*="/settings"] .person-button__name,
-#sidebar .person-button .person-button__name {
+#sidebar .person-button .person-button__name,
+#sidebar a[href*="/settings"] i[aria-label="settings"],
+#sidebar .person-button i[aria-label="settings"] {
   display: none !important;
 }
 
-/* Floating Bottom-Right Settings Button */
-#sidebar a[href*="/settings"] i[aria-label="settings"] {
+/* Sidebar Pin / Collapse Toggle when Sticky Sidebar is active */
+#sidebar .quick-toggles > div:last-child:not(:first-child):not([aria-label="Toggle Theme"]) {
+  display: none !important;
+}
+
+body:has(header .nav-toggle-button[disabled]) #sidebar.active .quick-toggles > div:last-child:not(:first-child):not([aria-label="Toggle Theme"]),
+body:has(header button.action[disabled]) #sidebar.active .quick-toggles > div:last-child:not(:first-child):not([aria-label="Toggle Theme"]) {
   position: fixed !important;
-  bottom: calc(3.1em + var(--safe-area-bottom, 0px)) !important;
-  right: calc(1.1em + var(--safe-area-right, 0px)) !important;
-  z-index: 10000 !important;
-  width: 40px !important;
-  height: 40px !important;
-  min-width: 40px !important;
-  min-height: 40px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border-radius: 50% !important;
-  background-color: var(--surfacePrimary) !important;
-  border: 1px solid var(--divider) !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+  top: calc(0.35em + var(--safe-area-top, 0px)) !important;
+  left: calc(0.45em + var(--safe-area-left, 0px)) !important;
+  z-index: 10001 !important;
+  width: 2.5em !important;
+  height: 2.5em !important;
+  font-size: 16px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 6px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  font-size: 20px !important;
-  color: var(--textPrimary) !important;
-  line-height: 1 !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+  opacity: 0 !important;
 }
 
-#sidebar a[href*="/settings"] i[aria-label="settings"]:hover {
-  transform: scale(1.08) !important;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+header .action.nav-toggle-button[disabled],
+header button.action[disabled] {
+  opacity: 1 !important;
+  cursor: pointer !important;
 }
 
 /* Finder File Items */

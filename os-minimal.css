@@ -200,11 +200,11 @@ header button.action:hover {
   z-index: 3 !important;
 }
 
-/* Hide clutter: user card logout, quick toggles, file actions, footer credits */
+/* Hide clutter: user card logout, non-sticky quick toggles, file actions, footer credits */
 #sidebar .user-card .logout-button,
 #sidebar .user-card .inner-card:has(.logout-button),
-#sidebar .quick-toggles,
-#sidebar .card-wrapper:has(.quick-toggles),
+#sidebar .quick-toggles > div:first-child,
+#sidebar .quick-toggles > div[aria-label="Toggle Theme"],
 #sidebar .file-actions,
 #sidebar .card-wrapper:has(.file-actions),
 #sidebar .credits,
@@ -212,11 +212,13 @@ header button.action:hover {
   display: none !important;
 }
 
-/* Flatten the headline card wrapper so it takes zero height in sidebar */
+/* Flatten the headline card and quick-toggles wrapper so they take zero height in sidebar */
 #sidebar .headline-card,
 #sidebar .user-card,
 #sidebar .user-card__profile,
-#sidebar .user-card > .inner-card {
+#sidebar .user-card > .inner-card,
+#sidebar .card-wrapper:has(.quick-toggles),
+#sidebar .quick-toggles {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
@@ -387,48 +389,50 @@ header button.action:hover {
   border-color: var(--textPrimary) !important;
 }
 
-/* Hide username text inside button */
+/* Hide username text and redundant settings cog (goes to same URL as user icon) */
 #sidebar a[href*="/settings"] .person-button__name,
-#sidebar .person-button .person-button__name {
+#sidebar .person-button .person-button__name,
+#sidebar a[href*="/settings"] i[aria-label="settings"],
+#sidebar .person-button i[aria-label="settings"] {
   display: none !important;
 }
 
 /* ==========================================================================
-   BOTTOM RIGHT: FLOATING SETTINGS TRIGGER
+   SIDEBAR PIN / COLLAPSE TOGGLE
+   When Sticky Sidebar is active on desktop, FileBrowser disables the header
+   hamburger button (`isDisabledMultiAction = isStickySidebar && state === 'menu'`).
+   Overlay the sticky-sidebar toggle onto the top-left header button ONLY when the
+   header button is disabled so clicking the top-left hamburger collapses/unpins
+   the sidebar!
    ========================================================================== */
-#sidebar a[href*="/settings"] i[aria-label="settings"] {
+#sidebar .quick-toggles > div:last-child:not(:first-child):not([aria-label="Toggle Theme"]) {
+  display: none !important;
+}
+
+body:has(header .nav-toggle-button[disabled]) #sidebar.active .quick-toggles > div:last-child:not(:first-child):not([aria-label="Toggle Theme"]),
+body:has(header button.action[disabled]) #sidebar.active .quick-toggles > div:last-child:not(:first-child):not([aria-label="Toggle Theme"]) {
   position: fixed !important;
-  bottom: calc(3.1em + var(--safe-area-bottom, 0px)) !important; /* Float cleanly above the status bar */
-  right: calc(1.1em + var(--safe-area-right, 0px)) !important;
-  z-index: 10000 !important;
-  width: 40px !important;
-  height: 40px !important;
-  min-width: 40px !important;
-  min-height: 40px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border-radius: 50% !important;
-  background-color: var(--surfacePrimary) !important;
-  border: 1px solid var(--divider) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+  top: calc(0.35em + var(--safe-area-top, 0px)) !important;
+  left: calc(0.45em + var(--safe-area-left, 0px)) !important;
+  z-index: 10001 !important;
+  width: 2.5em !important;
+  height: 2.5em !important;
+  font-size: 16px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: var(--borderRadius) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  font-size: 20px !important;
-  color: var(--textPrimary) !important;
-  line-height: 1 !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.15s ease !important;
+  opacity: 0 !important;
 }
 
-#sidebar a[href*="/settings"] i[aria-label="settings"]:hover {
-  transform: scale(1.08) rotate(20deg) !important;
-  background-color: var(--surfaceSecondary) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
-}
-
-#sidebar a[href*="/settings"] i[aria-label="settings"]:active {
-  transform: scale(0.96) !important;
+/* Ensure disabled hamburger button still looks interactive when sticky sidebar is open */
+header .action.nav-toggle-button[disabled],
+header button.action[disabled] {
+  opacity: 1 !important;
+  cursor: pointer !important;
 }
 
 /* ==========================================================================
