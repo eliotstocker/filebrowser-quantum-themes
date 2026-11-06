@@ -343,13 +343,13 @@ header button.action:hover {
 }
 
 /* ==========================================================================
-   TOP RIGHT: USER PROFILE PILL (AVATAR + USERNAME) & LOGOUT BUTTON
+   TOP RIGHT: USER PROFILE PILL (AVATAR + USERNAME)
    ========================================================================== */
 #sidebar a.person-button,
 #sidebar button.person-button {
   position: fixed !important;
   top: calc(0.5em + var(--safe-area-top, 0px)) !important;
-  right: calc(3.15em + var(--safe-area-right, 0px)) !important;
+  right: calc(0.75em + var(--safe-area-right, 0px)) !important;
   z-index: 10000 !important;
   height: 32px !important;
   min-height: 32px !important;
@@ -372,12 +372,6 @@ header button.action:hover {
   box-shadow: none !important;
   text-decoration: none !important;
   transition: background-color 0.15s ease, border-color 0.15s ease !important;
-}
-
-/* If there is no logout button rendered, anchor the user pill closer to the right edge */
-#sidebar .user-card:not(:has(.logout-button)) a.person-button,
-#sidebar .user-card:not(:has(.logout-button)) button.person-button {
-  right: calc(0.75em + var(--safe-area-right, 0px)) !important;
 }
 
 #sidebar a.person-button:hover,
@@ -421,28 +415,57 @@ header button.action:hover {
   display: none !important;
 }
 
-/* Top-Right Logout Icon Button */
+@media (max-width: 768px) {
+  #sidebar .person-button .person-button__name {
+    display: none !important;
+  }
+  #sidebar a.person-button,
+  #sidebar button.person-button {
+    width: 32px !important;
+    padding: 0 !important;
+    right: calc(0.75em + var(--safe-area-right, 0px)) !important;
+  }
+}
+
+/* ==========================================================================
+   SIDEBAR LOGOUT MENU ITEM (Anchored at bottom of side menu)
+   ========================================================================== */
+#sidebar .user-card > .inner-card:has(.logout-button) {
+  position: absolute !important;
+  bottom: calc(3.2em + var(--safe-area-bottom, 0px)) !important;
+  left: 0.5em !important;
+  right: 0.5em !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 2.25em !important;
+  padding-top: 0.35em !important;
+  border-top: 1px solid var(--divider) !important;
+  display: flex !important;
+  z-index: 10 !important;
+}
+
 #sidebar .user-card .logout-button {
-  position: fixed !important;
-  top: calc(0.5em + var(--safe-area-top, 0px)) !important;
-  right: calc(0.75em + var(--safe-area-right, 0px)) !important;
-  z-index: 10000 !important;
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  min-height: 32px !important;
-  padding: 0 !important;
+  position: static !important;
+  width: 100% !important;
+  height: 2.25em !important;
+  min-height: 2.25em !important;
+  padding: 0.4em 0.65em !important;
   margin: 0 !important;
-  border-radius: 50% !important;
+  border-radius: var(--borderRadius) !important;
   background-color: transparent !important;
   color: var(--textSecondary) !important;
   border: 1px solid transparent !important;
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
+  gap: 0.6em !important;
+  font-family: var(--font-stack) !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
   cursor: pointer !important;
   box-shadow: none !important;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
 }
 
 #sidebar .user-card .logout-button i {
@@ -453,23 +476,17 @@ header button.action:hover {
   margin: 0 !important;
 }
 
+#sidebar .user-card .logout-button::after {
+  content: "Log out";
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  color: inherit !important;
+}
+
 #sidebar .user-card .logout-button:hover {
   background-color: var(--hoverOverlay) !important;
   color: var(--textPrimary) !important;
-  border-color: var(--divider) !important;
   transform: none !important;
-}
-
-@media (max-width: 768px) {
-  #sidebar .person-button .person-button__name {
-    display: none !important;
-  }
-  #sidebar a.person-button,
-  #sidebar button.person-button {
-    width: 32px !important;
-    padding: 0 !important;
-    right: calc(2.9em + var(--safe-area-right, 0px)) !important;
-  }
 }
 
 /* ==========================================================================
