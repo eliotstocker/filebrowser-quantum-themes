@@ -309,3 +309,30 @@ button:hover:not(:disabled) {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--textSecondary);
 }
+
+/* Completely hide custom floating scrollbar component */
+.custom-scrollbar,
+.custom-scrollbar .thumb,
+.custom-scrollbar .thumb-section-id {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Restore native browser scrollbar */
+html,
+body,
+#main,
+.scroll-wrapper {
+  scrollbar-width: auto !important;
+}
+
+#main::-webkit-scrollbar,
+.scroll-wrapper::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: block !important;
+}

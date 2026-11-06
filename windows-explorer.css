@@ -593,12 +593,39 @@ button.button:not(.sidebar-link-button):not(.source-button):not(.person-button):
   line-height: 22px !important;
 }
 
-/* Settings View Container & Windows 11 Settings Polish */
+/* Completely hide custom floating scrollbar component */
+.custom-scrollbar,
+.custom-scrollbar .thumb,
+.custom-scrollbar .thumb-section-id {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Restore native browser scrollbar */
+html,
+body,
+#main,
+.scroll-wrapper {
+  scrollbar-width: auto !important;
+}
+
+#main::-webkit-scrollbar,
+.scroll-wrapper::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: block !important;
+}
+
+/* Settings View Container (matches full pane width) */
 .dashboard:has(.settings-views),
 .settings-views {
-  max-width: 780px !important;
-  margin: 1.25rem auto !important;
-  padding: 0 1rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
 }
 
 .settings-views .card,
@@ -737,27 +764,6 @@ button.button:not(.sidebar-link-button):not(.source-button):not(.person-button):
   border-left: none !important;
   border-radius: 0 !important;
   transition: background-color 0.15s ease !important;
-}
-
-/* Accordion & Section Headers */
-.settings-group-title {
-  padding: 0.45rem 0.75rem !important;
-  margin-top: 0.5rem !important;
-  border-radius: 4px !important;
-  background-color: var(--surfaceSecondary) !important;
-  border: 1px solid var(--divider) !important;
-  cursor: pointer !important;
-}
-
-.settings-group-title h3 {
-  font-size: 0.85rem !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-}
-
-.settings-content {
-  margin-top: 0.35rem !important;
-  padding: 0.25rem 0.5rem 0.65rem !important;
 }
 
 /* Form Controls & Inputs */
