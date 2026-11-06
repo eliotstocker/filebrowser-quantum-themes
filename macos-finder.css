@@ -100,8 +100,16 @@ header.flexbar,
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   height: var(--header-height) !important;
-  padding-right: calc(3.6em + var(--safe-area-right, 0px)) !important;
+  padding-right: calc(9.5em + var(--safe-area-right, 0px)) !important;
   z-index: 3 !important;
+}
+
+@media (max-width: 768px) {
+  header,
+  header.flexbar,
+  .sidebar-overlay header.flexbar {
+    padding-right: calc(5.2em + var(--safe-area-right, 0px)) !important;
+  }
 }
 
 header title,
@@ -180,8 +188,6 @@ header button.action:hover {
 }
 
 /* Hide non-shortcut sidebar components */
-#sidebar .user-card .logout-button,
-#sidebar .user-card .inner-card:has(.logout-button),
 #sidebar .quick-toggles > div:first-child,
 #sidebar .quick-toggles > div[aria-label="Toggle Theme"],
 #sidebar .file-actions,
@@ -205,14 +211,6 @@ header button.action:hover {
   margin: 0 !important;
   padding: 0 !important;
   overflow: visible !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  color: transparent !important;
-}
-
-#sidebar a.person-button,
-#sidebar button.person-button {
-  display: contents !important;
   font-size: 0 !important;
   line-height: 0 !important;
   color: transparent !important;
@@ -286,44 +284,129 @@ header button.action:hover {
   font-weight: 500 !important;
 }
 
-/* Top Right User Avatar */
-#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]),
-#sidebar a[href*="/settings"] i:not([aria-label="settings"]),
-#sidebar .person-button i:not([aria-label="settings"]):not(.material-symbols-outlined) {
+/* Top Right User Profile Pill (Avatar + Username) & Logout Button */
+#sidebar a.person-button,
+#sidebar button.person-button {
   position: fixed !important;
-  top: calc(0.55em + var(--safe-area-top, 0px)) !important;
-  right: calc(0.85em + var(--safe-area-right, 0px)) !important;
+  top: calc(0.5em + var(--safe-area-top, 0px)) !important;
+  right: calc(3.15em + var(--safe-area-right, 0px)) !important;
+  z-index: 10000 !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  width: auto !important;
+  max-width: 11em !important;
+  padding: 0 10px 0 8px !important;
+  margin: 0 !important;
+  border-radius: 9999px !important;
+  background-color: var(--surfaceSecondary) !important;
+  color: var(--textPrimary) !important;
+  border: 1px solid var(--divider) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+#sidebar .user-card:not(:has(.logout-button)) a.person-button,
+#sidebar .user-card:not(:has(.logout-button)) button.person-button {
+  right: calc(0.75em + var(--safe-area-right, 0px)) !important;
+}
+
+#sidebar a.person-button:hover,
+#sidebar button.person-button:hover {
+  background-color: var(--hoverOverlay) !important;
+  transform: none !important;
+}
+
+#sidebar .person-button .person-button__icon:not([aria-label="settings"]),
+#sidebar .person-button i:not([aria-label="settings"]) {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
+  color: var(--textPrimary) !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#sidebar .person-button .person-button__name {
+  display: inline-block !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  color: var(--textPrimary) !important;
+  max-width: 7.5em !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Hide redundant settings cog */
+#sidebar a[href*="/settings"] i[aria-label="settings"],
+#sidebar .person-button i[aria-label="settings"] {
+  display: none !important;
+}
+
+/* Top-Right Logout Icon Button */
+#sidebar .user-card .logout-button {
+  position: fixed !important;
+  top: calc(0.5em + var(--safe-area-top, 0px)) !important;
+  right: calc(0.75em + var(--safe-area-right, 0px)) !important;
   z-index: 10000 !important;
   width: 30px !important;
   height: 30px !important;
   min-width: 30px !important;
   min-height: 30px !important;
-  border-radius: 50% !important;
-  background-color: var(--surfaceSecondary) !important;
-  color: var(--textPrimary) !important;
-  border: 1px solid var(--divider) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-size: 18px !important;
-  line-height: 1 !important;
   padding: 0 !important;
   margin: 0 !important;
+  border-radius: 50% !important;
+  background-color: transparent !important;
+  color: var(--textSecondary) !important;
+  border: 1px solid transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   cursor: pointer !important;
-  transition: transform 0.15s ease !important;
+  box-shadow: none !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
 }
 
-#sidebar a[href*="/settings"] .person-button__icon:not([aria-label="settings"]):hover,
-#sidebar a[href*="/settings"] i:not([aria-label="settings"]):hover {
-  transform: scale(1.08) !important;
+#sidebar .user-card .logout-button i {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  color: inherit !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* Hide username text and redundant settings cog */
-#sidebar a[href*="/settings"] .person-button__name,
-#sidebar .person-button .person-button__name,
-#sidebar a[href*="/settings"] i[aria-label="settings"],
-#sidebar .person-button i[aria-label="settings"] {
-  display: none !important;
+#sidebar .user-card .logout-button:hover {
+  background-color: var(--hoverOverlay) !important;
+  color: var(--textPrimary) !important;
+  transform: none !important;
+}
+
+@media (max-width: 768px) {
+  #sidebar .person-button .person-button__name {
+    display: none !important;
+  }
+  #sidebar a.person-button,
+  #sidebar button.person-button {
+    width: 30px !important;
+    padding: 0 !important;
+    right: calc(2.8em + var(--safe-area-right, 0px)) !important;
+  }
 }
 
 /* Sidebar Pin / Collapse Toggle when Sticky Sidebar is active */
@@ -390,8 +473,8 @@ header button.action[disabled] {
 }
 
 /* Buttons */
-.button:not(.sidebar-link-button):not(.source-button):not(.person-button),
-button.button:not(.sidebar-link-button):not(.source-button):not(.person-button) {
+.button:not(.sidebar-link-button):not(.source-button):not(.person-button):not(.logout-button),
+button.button:not(.sidebar-link-button):not(.source-button):not(.person-button):not(.logout-button) {
   background-color: var(--primaryColor) !important;
   color: #ffffff !important;
   font-weight: 500 !important;
